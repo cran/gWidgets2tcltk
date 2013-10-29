@@ -1,0 +1,551 @@
+\name{.gmessage.guiWidgetsToolkittcltk}
+\alias{.addStockIcons.guiWidgetsToolkittcltk}
+\alias{.gaction.guiWidgetsToolkittcltk}
+\alias{.galert.guiWidgetsToolkittcltk}
+\alias{.gbasicdialog.guiWidgetsToolkittcltk}
+\alias{.gbutton.guiWidgetsToolkittcltk}
+\alias{.gcalendar.guiWidgetsToolkittcltk}
+\alias{.gcheckbox.guiWidgetsToolkittcltk}
+\alias{.gcheckboxgroup.guiWidgetsToolkittcltk}
+\alias{.gcombobox.guiWidgetsToolkittcltk}
+\alias{.gconfirm.guiWidgetsToolkittcltk}
+\alias{.gdf.guiWidgetsToolkittcltk}
+\alias{.gedit.guiWidgetsToolkittcltk}
+\alias{.getStockIconByName.guiWidgetsToolkittcltk}
+\alias{.getStockIcons.guiWidgetsToolkittcltk}
+\alias{.gexpandgroup.guiWidgetsToolkittcltk}
+\alias{.gfile.guiWidgetsToolkittcltk}
+\alias{.gfilebrowse.guiWidgetsToolkittcltk}
+\alias{.gformlayout.guiWidgetsToolkittcltk}
+\alias{.gframe.guiWidgetsToolkittcltk}
+\alias{.ggroup.guiWidgetsToolkittcltk}
+\alias{.gimage.guiWidgetsToolkittcltk}
+\alias{.ginput.guiWidgetsToolkittcltk}
+\alias{.glabel.guiWidgetsToolkittcltk}
+\alias{.glayout.guiWidgetsToolkittcltk}
+\alias{.gmenu.guiWidgetsToolkittcltk}
+\alias{.gmessage.guiWidgetsToolkittcltk}
+\alias{.gnotebook.guiWidgetsToolkittcltk}
+\alias{.gpanedgroup.guiWidgetsToolkittcltk}
+\alias{.gprogressbar.guiWidgetsToolkittcltk}
+\alias{.gradio.guiWidgetsToolkittcltk}
+\alias{.gseparator.guiWidgetsToolkittcltk}
+\alias{.gslider.guiWidgetsToolkittcltk}
+\alias{.gspinbutton.guiWidgetsToolkittcltk}
+\alias{.gstackwidget.guiWidgetsToolkittcltk}
+\alias{.gstatusbar.guiWidgetsToolkittcltk}
+\alias{.gtable.guiWidgetsToolkittcltk}
+\alias{.gtext.guiWidgetsToolkittcltk}
+\alias{.gtimer.guiWidgetsToolkittcltk}
+\alias{.gtoolbar.guiWidgetsToolkittcltk}
+\alias{.gtree.guiWidgetsToolkittcltk}
+\alias{.gvarbrowser.guiWidgetsToolkittcltk}
+\alias{.gwindow.guiWidgetsToolkittcltk}
+\alias{.stockIconFromObject.guiWidgetsToolkittcltk}
+\title{toolkit implementation for gmessage}
+\usage{
+  \method{.gmessage}{guiWidgetsToolkittcltk} (toolkit, msg,
+    title = "message",
+    icon = c("info", "warning", "error", "question"),
+    parent = NULL, ...)
+
+  \method{.gconfirm}{guiWidgetsToolkittcltk} (toolkit, msg,
+    title = "Confirm",
+    icon = c("info", "warning", "error", "question"),
+    parent = NULL, ...)
+
+  \method{.ginput}{guiWidgetsToolkittcltk} (toolkit, msg,
+    text = "", title = "Input",
+    icon = c("info", "warning", "error", "question"),
+    parent = NULL, ...)
+
+  \method{.gbasicdialog}{guiWidgetsToolkittcltk} (toolkit,
+    title = "Dialog", parent = NULL, do.buttons = TRUE,
+    handler = NULL, action = NULL, ...)
+
+  \method{.galert}{guiWidgetsToolkittcltk} (toolkit, msg,
+    title = "message", delay = 3, parent = NULL, ...)
+
+  \method{.gmenu}{guiWidgetsToolkittcltk} (toolkit,
+    menu.list = list(), popup = FALSE, container = NULL,
+    ...)
+
+  \method{.gaction}{guiWidgetsToolkittcltk} (toolkit,
+    label, tooltip = NULL, icon = NULL, key.accel = NULL,
+    handler = NULL, action = NULL, parent = NULL, ...)
+
+  \method{.gbutton}{guiWidgetsToolkittcltk} (toolkit, text,
+    handler, action, container, ...)
+
+  \method{.gcalendar}{guiWidgetsToolkittcltk} (toolkit,
+    text = "", format = "\%Y-\%m-\%d", handler = NULL,
+    action = NULL, container = NULL, ...)
+
+  \method{.gcheckbox}{guiWidgetsToolkittcltk} (toolkit,
+    text, checked = FALSE, use.togglebutton = FALSE,
+    handler = NULL, action = NULL, container = NULL, ...)
+
+  \method{.gtable}{guiWidgetsToolkittcltk} (toolkit, items,
+    multiple = FALSE, chosen.col = 1, icon.col = NULL,
+    tooltip.col = NULL, handler = NULL, action = NULL,
+    container = NULL, ...)
+
+  \method{.gcheckboxgroup}{guiWidgetsToolkittcltk}(toolkit=NULL,
+    items, checked = FALSE,horizontal = FALSE, use.table =
+    FALSE, handler = NULL, action = NULL, container = NULL,
+    ...)
+
+  \method{.gcombobox}{guiWidgetsToolkittcltk} (toolkit,
+    items, selected = 1, editable = FALSE,
+    coerce.with = NULL, handler = NULL, action = NULL,
+    container = NULL, ...)
+
+  \method{.gdf}{guiWidgetsToolkittcltk} (toolkit,
+    items = NULL, handler = NULL, action = NULL,
+    container = NULL, ...)
+
+  \method{.gedit}{guiWidgetsToolkittcltk} (toolkit,
+    text = "", width = 25, coerce.with = NULL,
+    initial.msg = initial.msg, handler = NULL,
+    action = NULL, container = NULL, ...)
+
+  \method{.gexpandgroup}{guiWidgetsToolkittcltk} (toolkit,
+    text, markup, horizontal = TRUE, handler = NULL,
+    action = NULL, container = NULL, ...)
+
+  \method{.gfile}{guiWidgetsToolkittcltk} (toolkit,
+    text = "", type = c("open", "save", "selectdir"),
+    initial.filename = NULL, initial.dir = getwd(),
+    filter = list(), multi = FALSE, ...)
+
+  \method{.gfilebrowse}{guiWidgetsToolkittcltk} (toolkit,
+    text = "", type = c("open", "save", "selectdir"),
+    initial.filename = NULL, initial.dir = getwd(),
+    filter = list(), quote = TRUE, handler = NULL,
+    action = NULL, container = NULL, ...)
+
+  \method{.gformlayout}{guiWidgetsToolkittcltk} (toolkit,
+    align = "left", spacing = 5, container = NULL, ...)
+
+  \method{.ggroup}{guiWidgetsToolkittcltk} (toolkit,
+    horizontal = TRUE, spacing = 5,
+    use.scrollwindow = FALSE, container = NULL, ...)
+
+  \method{.gframe}{guiWidgetsToolkittcltk} (toolkit, text,
+    markup, pos, horizontal = TRUE, spacing = 5,
+    container = NULL, ...)
+
+  \method{.gimage}{guiWidgetsToolkittcltk} (toolkit,
+    filename = "", dirname = "", stock.id = NULL,
+    size = "", handler = NULL, action = NULL,
+    container = NULL, ...)
+
+  \method{.glabel}{guiWidgetsToolkittcltk} (toolkit,
+    text = "", markup = FALSE, editable = FALSE,
+    handler = NULL, action = NULL, container = NULL, ...)
+
+  \method{.glayout}{guiWidgetsToolkittcltk} (toolkit,
+    homogeneous = FALSE, spacing = 10, container = NULL,
+    ...)
+
+  \method{.gnotebook}{guiWidgetsToolkittcltk} (toolkit,
+    tab.pos = 3, container = NULL, ...)
+
+  \method{.gpanedgroup}{guiWidgetsToolkittcltk} (toolkit,
+    horizontal = TRUE, container = NULL, ...)
+
+  \method{.gradio}{guiWidgetsToolkittcltk} (toolkit, items,
+    selected = 1, horizontal = FALSE, handler = NULL,
+    action = NULL, container = NULL, ...)
+
+  \method{.gseparator}{guiWidgetsToolkittcltk} (toolkit,
+    horizontal = TRUE, container = NULL, ...)
+
+  \method{.gslider}{guiWidgetsToolkittcltk} (toolkit,
+    from = 0, to = 100, by = 1, value = from,
+    horizontal = TRUE, handler = NULL, action = NULL,
+    container = NULL, ...)
+
+  \method{.gspinbutton}{guiWidgetsToolkittcltk} (toolkit,
+    from = 0, to = 10, by = 1, value = from, digits = 0,
+    handler = NULL, action = NULL, container = NULL, ...)
+
+  \method{.gstackwidget}{guiWidgetsToolkittcltk} (toolkit,
+    container = NULL, ...)
+
+  \method{.gstatusbar}{guiWidgetsToolkittcltk} (toolkit,
+    text = "", container = NULL, ...)
+
+  \method{.gtext}{guiWidgetsToolkittcltk} (toolkit,
+    text = NULL, width = NULL, height = 300,
+    font.attr = NULL, wrap = TRUE, handler = NULL,
+    action = NULL, container = NULL, ...)
+
+  \method{.gtimer}{guiWidgetsToolkittcltk} (toolkit, ms,
+    FUN, data = NULL, one.shot = FALSE, start = TRUE)
+
+  \method{.gtoolbar}{guiWidgetsToolkittcltk} (toolkit,
+    toolbar.list = list(),
+    style = c("both", "icons", "text", "both-horiz"),
+    container = NULL, ...)
+
+  \method{.gtree}{guiWidgetsToolkittcltk} (toolkit,
+    offspring = NULL, offspring.data = NULL,
+    chosen.col = 1, offspring.col = 2, icon.col = NULL,
+    tooltip.col = NULL, multiple = FALSE, handler = NULL,
+    action = NULL, container = NULL, ...)
+
+  \method{.gwindow}{guiWidgetsToolkittcltk} (toolkit,
+    title, visible = visible, name, width, height, parent,
+    handler, action, ...)
+
+  \method{.addStockIcons}{guiWidgetsToolkittcltk} (toolkit,
+    iconNames, iconFiles, ...)
+
+  \method{.getStockIcons}{guiWidgetsToolkittcltk} (toolkit,
+    ...)
+
+  \method{.getStockIconByName}{guiWidgetsToolkittcltk}(toolkit,name,
+    ...)
+
+  \method{.stockIconFromObject}{guiWidgetsToolkittcltk}(toolkit,obj,
+    ...)
+
+  \method{.gvarbrowser}{guiWidgetsToolkittcltk} (toolkit,
+    handler = NULL, action = "summary", container = NULL,
+    ...)
+
+  \method{.gprogressbar}{guiWidgetsToolkittcltk} (toolkit,
+    value, container, ...)
+}
+\arguments{
+  \item{delay}{delay}
+
+  \item{initial.msg}{initial.msg}
+
+  \item{digits}{digits}
+
+  \item{...}{passed to constructor}
+
+  \item{name}{name of icon}
+
+  \item{obj}{obj to get icon from}
+
+  \item{toolkit}{toolkit}
+
+  \item{msg}{Character. message to display.}
+
+  \item{title}{Character. Title}
+
+  \item{icon}{What icon to show}
+
+  \item{parent}{Hint as to where to display}
+
+  \item{text}{Character. Initial text}
+
+  \item{do.buttons}{FALSE to suppress buttons when no
+  parent}
+
+  \item{handler}{handler called when \code{Ok} button
+  invoked}
+
+  \item{action}{passed to handler for OK button}
+
+  \item{label}{label for action}
+
+  \item{tooltip}{toolktip for actin}
+
+  \item{key.accel}{keyboard accelerator. If given, parent
+  must be specified.}
+
+  \item{menu.list}{A list defining the menu structure.
+  Named sub lists determine the submenu titles and
+  structure. The list may have components of class:
+  \code{GAction}, mapped to a button; \code{GSeparator},
+  mapped to a horizontal separator; \code{GRadio}, mapped
+  to linked buttons; or \code{GCheckbox}, mapped to a
+  checkbox button.}
+
+  \item{popup}{logical. If true, make a popup window to be
+  added through a handler call}
+
+  \item{container}{A parent container. When a widget is
+  created it can be incorporated into the widget heirarchy
+  by passing in a parent container at construction time.
+  (For some toolkits this is not optional, e.g.
+  \pkg{gWidgets2tcltk} or \pkg{gWidgets2WWW2}.)}
+
+  \item{value}{a list or menu bar specifying the new men
+  ubar}
+
+  \item{format}{Date format}
+
+  \item{checked}{is button selected}
+
+  \item{use.togglebutton}{Use a toggle button (shows
+  depressed) not a check box}
+
+  \item{items}{data.frame specifies items for selection.
+  May be a vector, matrix or data frame}
+
+  \item{multiple}{logical allow multiple selection}
+
+  \item{chosen.col}{which value from the row is returned by
+  selection}
+
+  \item{icon.col}{NULL or integer. If latter, specifies
+  column containing stock icon}
+
+  \item{tooltip.col}{NULL or integer. If latter, specifies
+  column containing tooltip}
+
+  \item{horizontal}{logical. If true displayed
+  horizontally, else vertically}
+
+  \item{use.table}{logical. If supported, and \code{TRUE}
+  then uses a table widget with scrollbars}
+
+  \item{selected}{integer. Which item (by index) is
+  selected. Use -1 for no selection}
+
+  \item{editable}{logical. Is user allowed to edit value}
+
+  \item{coerce.with}{A function of function name to be
+  called before selected value is returned by
+  \code{svalue}}
+
+  \item{type}{type of browser: to open a file, to save a
+  file or to select a directory}
+
+  \item{initial.filename}{Suggested file name}
+
+  \item{initial.dir}{initial directory. If a filename is
+  given, and is not an absolute name, this will be
+  prepended. If filename given initial directory will be
+  taken from that.}
+
+  \item{filter}{A filter specifiation. This can be a named
+  character vector of file extensions or something toolkit
+  specific. Here are some examples: \itemize{
+  \item{character}{c("csv"="csv","txt"="txt")}
+  \item{RGtk2}{ Something like \preformatted{ list("All
+  files" = list(patterns = c("*")), "R files" =
+  list(patterns = c("*.R", "*.Rdata")), "text files" =
+  list(mime.types = c("text/plain")) ) } } \item{tcltk}{}
+  \item{Qt}{} }}
+
+  \item{multi}{Logical. Allow multiple files to be
+  selected?}
+
+  \item{quote}{quote output}
+
+  \item{align}{alignment of label. Left justify or center
+  balance. Leave as "default" for underlying toolkit
+  default.}
+
+  \item{spacing}{spacing between columns}
+
+  \item{use.scrollwindow}{logical. Either \code{TRUE},
+  \code{"TRUE"}, \code{FALSE}, \code{"FALSE"}, \code{"y"},
+  or \code{"x"}. For all toolkits a non-FALSE value will
+  place the child components into a scrollable container.
+  For some toolkits this will only be in the direction of
+  packing. If the toolkit allows it (RGtk2), then values of
+  \code{"x"} or \code{"y"} can be used to override the
+  default scrolling directions. A box container with
+  scrollwindows should have it size set either directly or
+  through packing with \code{expand=TRUE} as its size
+  request will not reflect the size of its child
+  components.}
+
+  \item{markup}{does label use markup (toolkit specific)}
+
+  \item{pos}{position of label: 0=left, 1=right, some
+  toolkit allow values in between}
+
+  \item{filename}{basename of file}
+
+  \item{dirname}{dirname of file}
+
+  \item{stock.id}{stock id of icon (if non NULL)}
+
+  \item{size}{size of icon when a stock id (toolkit
+  dependent)}
+
+  \item{homogeneous}{are cells all the same size}
+
+  \item{tab.pos}{integer. Position of tabs, 1 on bottom, 2
+  left, 3 top, 4 right. (If supported)}
+
+  \item{from}{If a number of length one then a starting
+  point, in which case to, by are passed to \code{seq}.
+  Otherwise a sequence of values for which
+  sort(unique(from)) will order}
+
+  \item{to}{ending point when from is starting point}
+
+  \item{by}{step size if not specified by \code{from}}
+
+  \item{width}{width of widget}
+
+  \item{height}{height of widget (when width is specified)}
+
+  \item{font.attr}{font attributes for text buffer. One can
+  also specify font attributes for insertion. The font
+  attributes are specified with a named vector or list,
+  with names and values coming from: \describe{
+  \item{weight}{ in c("light", "normal", "bold", "heavy")}
+  \item{style}{inc("normal", "oblique", "italic")}
+  \item{family}{in c("sans", "helvetica", "times",
+  "monospace")} \item{size}{in c("xx-small", "x-small",
+  "small", "medium", "large", "x-large", "xx-large")}
+  \item{foreground}{a value in colors()}
+  \item{background}{a value in colors()} }}
+
+  \item{wrap}{logical do lines wrap}
+
+  \item{ms}{interval in milliseconds}
+
+  \item{FUN}{FUnction to call. Has one argument, data
+  passed in}
+
+  \item{data}{passed to function}
+
+  \item{one.shot}{logical. If TRUE, called just once, else
+  repeats}
+
+  \item{start}{logical. If FALSE, started by
+  \code{start_timer} OO method. (Call
+  \code{obj$start_time()}).}
+
+  \item{toolbar.list}{list. A one-level list of
+  \code{gaction} items, \code{gseparator} items or possibly
+  other widgets. In the latter cases the \code{container}
+  argument is not specified prior. (XXX Need to work this
+  out with gWidgetstcltk)}
+
+  \item{style}{style for icon or text.}
+
+  \item{offspring}{function. A function passed values
+  \code{path} and \code{data}, the latter from
+  \code{offspring.data}. The path is the current position
+  of the parent item using the named keys from the chosen
+  column.}
+
+  \item{offspring.data}{Passed to second argument of
+  \code{offspring} function. Used to parameterize a
+  function call.}
+
+  \item{offspring.col}{integer or column name. Points to
+  column containing logical values indicating if a row has
+  offspring.}
+
+  \item{visible}{logical. If code{TRUE} window is drawn
+  when constructed. Otherwise, window can be drawn later
+  using \code{visible<-}. This value can default to
+  \code{FALSE} by setting the option:
+  \code{options("gWidgets:gwindow-default-visible-is-false"=TRUE)}.
+  There are advantages: windows can draw slowly when adding
+  many items. With \pkg{gWidgets2RGtk2}, the
+  \code{ggraphics} widget can like to be added to an
+  undrawn widget as this avoids sizing issue.}
+
+  \item{iconNames}{names of icons}
+
+  \item{iconFiles}{path of icons}
+}
+\description{
+  toolkit implementation for gmessage
+
+  toolkit implementation for gconfirm
+
+  toolkit implmentation of ginput
+
+  toolkit implementation
+
+  toolkit implementation of galert
+
+  Toolkit constructor
+
+  Toolkit constructor
+
+  Toolkit constructor
+
+  Toolkit constructor
+
+  Toolkit XXX constructor
+
+  Toolkit constructor
+
+  Toolkit constructor
+
+  Toolkit constructor
+
+  Toolkit constructor
+
+  Toolkit gedit constructor
+
+  toolkit constructor
+
+  Toolkit implementation
+
+  Toolkit constructor
+
+  Toolkit constructor
+
+  toolkit constructor for ggroup
+
+  gframe constructor
+
+  Toolkit constructor
+
+  Toolkit label constructor
+
+  Toolkit constructor
+
+  Toolkit constructor
+
+  Toolkit constructor
+
+  Toolkit constructor
+
+  Toolkit constructor
+
+  Toolkit constructor
+
+  Toolkit XXX constructor
+
+  Toolkit constructor
+
+  Toolkit constructor
+
+  toolkit implementation of gtext
+
+  S3 method for gtimer
+
+  Toolkit constructor
+
+  Toolkit constructor
+
+  toolkit constructor for gwindow
+
+  add stock icons
+
+  Returns list of stock ids
+
+  return stock id
+
+  return stock id from object
+
+  Toolkit constructor
+
+  Toolkit constructor
+}
+\seealso{
+  The documentation for this is found at
+  \code{\link{gbutton}}.
+
+  The documentation for this is found at
+  \code{\link{gprogressbar}}.
+}
+
