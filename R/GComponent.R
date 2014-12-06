@@ -147,12 +147,14 @@ GComponent <- setRefClass("GComponent",
                                    ## we create a style
                                    color <- value$color
                                    spec <- map_font_to_spec(value)
-                                   kls <- as.character(tkwinfo("class", get_widget()))
+                                   spec <- gsub("\\s*$", "", spec)
+                                   kls <- as.character(tkwinfo("class", obj))
                                    style_name <- sprintf("%s_%s.%s", gsub(" ", "", spec), ifelse(is.null(color), "black", color), kls)
-                                   if(is.null(color))
-                                     tcl("ttk::style", "configure", style_name, font=spec)
-                                   else
+                                   if(is.null(color)) 
+                                       tcl("ttk::style", "configure", style_name, font=spec)
+                                   else 
                                      tcl("ttk::style", "configure", style_name, font=spec, foreground=color)
+                                   
                                    tkconfigure(obj, style=style_name)
                                  },
                                  set_font_tk=function(value, obj=get_widget()) {
@@ -163,7 +165,53 @@ GComponent <- setRefClass("GComponent",
                                    if(!is.null(color))
                                      tkconfigure(obj, color=color)
                                  },
+                                 font_family=function(family=NULL) {
+                                   is.null(family) && return("")
+                                   switch(family,
+                                          "normal"="times",
+                                          "sans" = "helvetica",
+                                          "serif" = "times",
+                                          "monospace"="courier",
+                                          "helvetica")
+                                 },
+                                 font_style=function(style=NULL) {
+                                   is.null(style) && return("")
+                                   switch(style,
+                                          "normal"="roman",
+                                          "oblique"="roman",
+                                          "italic"="italic",
+                                          "")
+                                 },
+                                 font_weight = function(weight=NULL) {
+                                   is.null(weight) && return("")                                   
+                                   switch(weight,
+                                          "heavy"="bold",
+                                          "ultra-bold"="bold",
+                                          "bold"="bold",
+                                          "normal"="normal",
+                                          "light"="normal",
+                                          "ultra-light" = "normal",
+                                          "")
+                                 },
+                                 font_size=function(size=NULL) {
+                                   is.null(size) && return("")
+                                   if(is.numeric(size))
+                                     return(size)
+                                   else
+                                     switch(size,
+                                            "xxx-large"=24,
+                                            "xx-large"=20,
+                                            "x-large"=18,
+                                            "large"=16,
+                                            "medium"=12,
+                                            "small"=10,
+                                            "x-small"=8,
+                                            "xx-small"=6,
+                                            "")
+                                 },
+                                 
                                  map_font_to_spec = function(markup, return_list=FALSE) {
+                                   ## TODO tidy up using functions from above
                                    fontList <- list()
                                    if(!is.null(markup$family))
                                      fontList <- merge_list(fontList, list(family=switch(markup$family,
@@ -173,7 +221,7 @@ GComponent <- setRefClass("GComponent",
                                                                         "monospace"="courier",
                                                                         markup$family)))
                                    else
-                                     fontList$family <- "helvetica"
+                                     fontList$family <- "times"
                                    
                                    if(!is.null(markup$style))
                                      fontList <- merge_list(fontList, list(slant=switch(markup$style,
@@ -379,8 +427,9 @@ GComponentObservable <- setRefClass("GComponentObservable",
                                         "Uses Observable framework for events. Adds observer, then call connect signal method. Override last if done elsewhere"
                                         if(is_handler(handler)) {
                                           o <- gWidgets2:::observer(.self, handler, action)
-                                          invisible(add_observer(o, signal))
+                                          id <- add_observer(o, signal)
                                           connect_to_toolkit_signal(signal, decorator=decorator, emitter=emitter, ...)
+                                          return(id)
                                         }
                                       },
                                       connect_to_toolkit_signal=function(
@@ -472,8 +521,17 @@ GComponentObservable <- setRefClass("GComponentObservable",
                                       add_handler_doubleclick = function(handler, action=NULL, ...) {
                                         add_handler("<Double-Button1>", handler, action, decorator=.self$click_decorator, ...)
                                       },
+                                        add_handler_shift_clicked = function(handler, action=NULL, ...) {
+                                            add_handler("<Shift-Button-1>", handler, action, decorator=.self$click_decorator, ...)
+                                        },
+                                        add_handler_control_clicked = function(handler, action=NULL, ...) {
+                                            add_handler("<Control-Button-1>", handler, action, decorator=.self$click_decorator, ...)
+                                        },
                                       add_handler_button_press=function(handler, action=NULL, ...) {
                                         add_handler("<ButtonPress>", handler, action, ...)
+                                      },
+                                      add_handler_button_release=function(handler, action=NULL, ...) {
+                                        add_handler("<ButtonRelease>", handler, action, ...)
                                       },
                                       add_handler_focus=function(handler, action=NULL, ...) {
                                         add_handler("<FocusIn>", handler, action, event_decorator, ...)

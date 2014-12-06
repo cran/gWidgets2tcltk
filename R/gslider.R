@@ -33,8 +33,9 @@ GSlider <- setRefClass("GSlider",
                              x <- from
                            x <- sort(unique(x))
                            items <<- x
+                           ind <- max(which(items <= value)) #match(value, items)
 
-                           t_var <<- tclVar(match(value, items))
+                           t_var <<- tclVar(ind)
                            orientation <- ifelse(horizontal, "horizontal", "vertical")
                            widget <<- tkwidget(container$get_widget(), "ttk::scale", from=1L, to=length(x),
                                                variable=t_var,
@@ -62,13 +63,15 @@ GSlider <- setRefClass("GSlider",
                            as.integer(tclvalue(t_var))
                          },
                          set_value=function(value, drop=TRUE, ...) {
-                           i <- match(value, items)
-                           if(!is.na(i))
-                             set_index(i)
+                             i <- max(which(items <= value))
+#                             i <- match(value, items)
+                             if(!is.na(i)) 
+                               set_index(as.integer(i))
                          },
                          set_index = function(value,...) {
                            a <- t_var
                            tclvalue(a) <- as.integer(value)
+                           invoke_change_handler()
                            update_tooltip()
                          },
                          get_items = function(i, ...) {
@@ -81,7 +84,8 @@ GSlider <- setRefClass("GSlider",
                            set_index(1L)
                          },
                          update_tooltip=function() {
-                           tk2tip(widget, get_value())
+                             val = as.character(get_value())
+                             tk2tip(widget, val)
                          }
 
                          ))

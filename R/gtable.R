@@ -90,7 +90,7 @@ gwidgets2_tcltk_format_to_char.Date <- function(x) format(x, format="%d-%m-%Y")
 ##' @rdname gwidgets2_tcltk_format_to_char
 ##' @method gwidgets2_tcltk_format_to_char data.frame
 ##' @S3method gwidgets2_tcltk_format_to_char data.frame
-gwidgets2_tcltk_format_to_char.data.frame <- function(x) as.data.frame(sapply(x, gwidgets2_tcltk_format_to_char))
+gwidgets2_tcltk_format_to_char.data.frame <- function(x) as.data.frame(lapply(x, gwidgets2_tcltk_format_to_char))
 
 
 ##' align a column based on the class of the content
@@ -177,11 +177,11 @@ BaseTableClass <- setRefClass("BaseTableClass",
                                 },
                                 bind_select=function() {
                                   "Select is double click or enter"
-#                                  tkbind(widget, "<Double-Button-1>", function() {
-#                                    .self$notify_observers(signal="<<SelectionMade>>"#)
-#                                  })
+                                  tkbind(widget, "<Double-Button-1>", function() {
+                                    .self$notify_observers(signal="<<SelectionMade>>")
+                                  })
                                   tkbind(widget, "<Return>", function() {
-                                    .self$notify_observers(signal="<Double-Button-1>")
+                                    .self$notify_observers(signal="<<SelectionMade>>")
                                   })
 
                                 },
@@ -215,7 +215,8 @@ BaseTableClass <- setRefClass("BaseTableClass",
                                     widths <- ceiling(6 +  widthOfChar * pmax(4, chars))
                                     stretch <- rep(FALSE, ncol(m)); stretch[ncol(m)] <- TRUE
                                   } else {
-                                    stretch <- c(rep(FALSE, length(widths)-1), TRUE)
+                                    if(is.null(widths))
+                                        stretch <- c(rep(FALSE, length(widths)-1), TRUE)
                                   }
                                   if(length(widths) != n) {
                                     message(sprintf("Widths are not the correct length. Expecting %s, got %s", n, length(widths)))
@@ -250,7 +251,7 @@ BaseTableClass <- setRefClass("BaseTableClass",
                                 },
                                 set_icons=function(icons) {
                                   "Set column of icons"
-                                  if(is.null(icons))
+                                  if(is.null(icons) || length(icons) == 0)
                                     return()
                                   if(length(icons) != nrow(DF)) {
                                     message(sprintf("Too few icons specified. Expected %s, got %s", nrow(DF), length(icons)))
@@ -407,20 +408,21 @@ BaseTableClass <- setRefClass("BaseTableClass",
                                       sapply(seq_along(i), function(i) replace_row_data(i, value[i,]))
                                     }
                                   } else if(missing(i)) {
-                                    value <- data.frame(value)
+                                    if(!is.data.frame(value))
+                                      value <- data.frame(value, stringsAsFactors=FALSE)
                                     sapply(seq_len(nrow(DF)), function(i) {
                                       vals <- DF[i,]
                                       vals[j] <- value[i,] # replace
                                       replace_row_data(i, vals)
                                     })
                                   } else {
-                                    ## XXX need to work on dim of value
                                     sapply(seq_along(i), function(ii) {
                                       vals <- DF[i[ii], ]
-                                      if(is.vector(value))
-                                        vals[j] <- value[i[ii]]
-                                      else
-                                        vals[j] <- value[i[ii], ]
+                                      if(is.vector(value)) {
+                                        vals[1,j] <- value[ii]
+                                      } else {
+                                        vals[1,j] <- value[ii, ]
+                                      }
                                       replace_row_data(i[ii], vals)
                                     })
                                   }

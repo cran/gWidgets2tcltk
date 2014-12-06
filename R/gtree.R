@@ -79,18 +79,21 @@ GTreeBase <- setRefClass("GTreeBase",
                        configure_column_widths=function(widths, data) {
                          "straight from GTable, subclass?"
                          if(!missing(data)) {
-                           m <- gWidgets2tcltk:::gwidgets2_tcltk_format_to_char(data)
-                           chars <- apply(m, 2, function(x) max(nchar(x)))
-                           widths <- ceiling(1.4 * widthOfChar * pmax(4, chars))
+                           widths <- sapply(data, function(col) {
+                             m <- gWidgets2tcltk:::gwidgets2_tcltk_format_to_char(col)
+                             chars <- max(nchar(m))
+                             ceiling(1.4 * widthOfChar * pmax(4, chars))
+                           })
                          }
                          if(length(widths) != no_columns) {
-                           message(sprintf("Widths are not the correct length. Expecting %s, got %s", n, length(widths)))
+                           print(list(m, data, chars, widths))
+                           message(sprintf("Widths are not the correct length. Expecting %s, got %s", no_columns, length(widths)))
                            return()
                          }
                          f <- function(col, width) tcl(widget, "column", col, width=width, stretch=FALSE)
                          mapply(f, seq_along(widths), widths)
                          
-                         tcl(widget, "column", ncol(m), stretch=TRUE)
+                         tcl(widget, "column", ncol(data), stretch=TRUE)
                          
                          ## do icon column, unlike gtable, here we want to strecth
                          tcl(widget, "column", "#0", width=50L, anchor="w", stretch=TRUE)                         
@@ -133,7 +136,11 @@ GTreeBase <- setRefClass("GTreeBase",
                        ## main gWidgets methods
                        get_value=function(i, drop=TRUE,...) {
                          "Return path (by chosen col)"
-                         get_tree_path(widget)[i, drop=drop]
+                         path <- get_tree_path(widget)
+                         if(drop)
+                           tail(path,n=1)
+                         else
+                           path
                        },
                        set_value=function(value, ...) {
                          "open path, set via match"
@@ -227,6 +234,17 @@ GTreeBase <- setRefClass("GTreeBase",
                          f <- function(col, value) tcl(widget, "heading", col, text=value)
                          mapply(f, seq_along(nms), nms)
                        },
+                       ## handler
+                       add_handler_clicked=function(handler, action=NULL, ...) {
+                         add_handler_button_release(handler, action=action, ...)
+                     },
+                         add_handler_double_clicked=function(handler, action=NULL, ...) {
+                             add_handler("<Double-Button-1>", handler, action)
+                         },
+                         add_handler_selection_changed=function(handler, action=NULL, ...) {
+                             add_handler("<<TreeviewSelect>>", handler, action)
+                         },
+
                        ## Some extra methods
                        clear_selection=function() {
                          tcl(widget, "selection", "set", "")
@@ -263,7 +281,7 @@ GTree <- setRefClass("GTree",
                                     offspring_col=offspring.col,
                                     icon_col = icon.col,
                                     tooltip_col=tooltip.col,
-                                    change_signal="<TreeviewExpand>"
+                                    change_signal="<<TreeviewSelect>>"
                                     )
                          
                          
@@ -301,14 +319,14 @@ GTree <- setRefClass("GTree",
                          })
                        },
                        configure_row=function(node, text, values, has_offspring, icon) {
-                         if(is.factor(values))
-                           values <- as.character(values)
-                         if(length(values) == 1)
-                           values <- sprintf("{%s}", values)
-                         if(length(values) > 0)
-                           id <- tcl(widget, "insert", node, "end", text=text, values=unlist(values))
-                         else
-                           id <- tcl(widget, "insert", node, "end", text=text)
+                         if(length(values) > 0) {
+                           values <- unlist(lapply(values, as.character))
+                           if(length(values) == 1)
+                             values <- sprintf("{%s}", values)
+                           id <- tcl(widget, "insert", node, "end", text=text, values=values)
+                           } else {
+                             id <- tcl(widget, "insert", node, "end", text=text)
+                           }
                          tcl(widget, "item", id, image=icon)
                          if(has_offspring) {
                            tcl(widget,"insert", id, "end", text="")
