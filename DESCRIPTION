@@ -1,5 +1,5 @@
 Package: gWidgets2tcltk
-Version: 1.0-3
+Version: 1.0-4
 Title: Toolkit Implementation of gWidgets2 for tcltk
 Author: John Verzani
 Maintainer: John Verzani <jverzani@gmail.com>
@@ -21,7 +21,7 @@ Collate: 'gWidgets2tcltk-package.R' 'List.R' 'misc.R' 'tcltk-misc.R'
         'gslider.R' 'gspinbutton.R' 'gstackwidget.R' 'gstatusbar.R'
         'gtext.R' 'gtimer.R' 'gtoolbar.R' 'gtree.R' 'gwindow.R'
         'icons.R' 'zzz.R' 'gvarbrowser.R' 'tk2tip.R' 'gprogressbar.R'
-Packaged: 2014-12-06 16:31:06 UTC; verzani
+Packaged: 2015-01-06 17:51:20 UTC; verzani
 NeedsCompilation: no
 Repository: CRAN
-Date/Publication: 2014-12-06 17:38:33
+Date/Publication: 2015-01-06 19:47:57
