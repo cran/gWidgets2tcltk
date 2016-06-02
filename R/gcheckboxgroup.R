@@ -6,10 +6,10 @@ NULL
 ##'
 ##' @inheritParams gWidgets2::gcheckboxgroup
 ##' @export
-##' @usage \method{.gcheckboxgroup}{guiWidgetsToolkittcltk}(toolkit=NULL, items, checked = FALSE,horizontal = FALSE, use.table = FALSE, handler = NULL, action = NULL, container = NULL, ...)
+##' @usage \method{.gcheckboxgroup}{guiWidgetsToolkittcltk}(toolkit=NULL, items, checked = FALSE,horizontal = FALSE,
+##'                 use.table = FALSE, handler = NULL, action = NULL, container = NULL, ...)
 ##' @rdname gWidgets2tcltk-undocumented
 ##' @method .gcheckboxgroup guiWidgetsToolkittcltk
-##' @S3method .gcheckboxgroup guiWidgetsToolkittcltk
 .gcheckboxgroup.guiWidgetsToolkittcltk <-  function(toolkit=NULL,
                                                     items, checked = FALSE, horizontal = FALSE,
                                                     use.table=FALSE, handler = NULL,
@@ -164,7 +164,10 @@ GCheckboxGroupTable <- setRefClass("GCheckboxGroupTable",
                                        set_column_headings(names(items))
                                        ## add in icons
                                        configure_icon_column(50)
-                                       
+
+                                       tkimage.create("photo", "::image::off", file=system.file("images", "checkbutton-off.gif", package="gWidgets2tcltk"))
+                                       tkimage.create("photo", "::image::on",  file=system.file("images", "checkbutton-on.gif",  package="gWidgets2tcltk"))
+
                                        icons <- paste("::image::", c("on","off"), sep="")
                                        class(icons) <- "StockIcon"
                                        on_off_icons <<- icons
