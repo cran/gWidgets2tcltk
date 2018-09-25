@@ -238,28 +238,28 @@ GComponent <- setRefClass("GComponent",
                                                                         "light"="normal",
                                                                         "ultra-light" = "normal",
                                                                         "normal")))
-                                   
-                                   if(!is.null(markup$size))
-                                     if(is.numeric(markup$size))
-                                       fontList <- merge_list(fontList, list(size=markup$size))
-                                     else
-                                       fontList <- merge_list(fontList,list(size = switch(markup$size,
-                                                                         "xxx-large"=24,
-                                                                         "xx-large"=20,
-                                                                         "x-large"=18,
-                                                                         "large"=16,
-                                                                         "medium"=12,
-                                                                         "small"=10,
-                                                                         "x-small"=8,
-                                                                         "xx-small"=6,
-                                                                         as.integer(markup$size))))
 
+                                     if(!is.null(markup$size)) {
+                                         if(is.numeric(markup$size))
+                                             fontList <- merge_list(fontList, list(size=markup$size))
+                                         else
+                                             fontList <- merge_list(fontList,list(size = switch(markup$size,
+                                                                                                "xxx-large"=24,
+                                                                                                "xx-large"=20,
+                                                                                                "x-large"=18,
+                                                                                                "large"=16,
+                                                                                                "medium"=12,
+                                                                                                "small"=10,
+                                                                                                "x-small"=8,
+                                                                                                "xx-small"=6,
+                                                                                                as.integer(markup$size))))
+                                     }
                                    if(return_list) {
-                                     fontList
+                                       fontList
                                    } else {
                                      ## return "name [size [options]]"
                                      if(!is.null(fontList$slant) || !is.null(fontList$weight))
-                                       fontList$size <- 12
+                                       fontList$size <- getWithDefault(fontList$size, 12)
 
                                      paste(fontList$family, fontList$size, fontList$weight, fontList$slant)
                                    }
@@ -534,10 +534,10 @@ GComponentObservable <- setRefClass("GComponentObservable",
                                         add_handler("<ButtonRelease>", handler, action, ...)
                                       },
                                       add_handler_focus=function(handler, action=NULL, ...) {
-                                        add_handler("<FocusIn>", handler, action, event_decorator, ...)
+                                        add_handler("<FocusIn>", handler, action, .self$event_decorator, ...)
                                       },
                                       add_handler_blur=function(handler, action=NULL, ...) {
-                                        add_handler("<FocusOut>", handler, action, event_decorator, ...)
+                                        add_handler("<FocusOut>", handler, action, .self$event_decorator, ...)
                                       },
                                       add_handler_keystroke=function(handler, action=NULL, ...) {
                                         "Keystroke handler."

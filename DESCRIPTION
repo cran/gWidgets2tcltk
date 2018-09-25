@@ -1,5 +1,5 @@
 Package: gWidgets2tcltk
-Version: 1.0-5
+Version: 1.0-6
 Title: Toolkit Implementation of gWidgets2 for tcltk
 Author: John Verzani
 Maintainer: John Verzani <jverzani@gmail.com>
@@ -20,8 +20,8 @@ Collate: 'List.R' 'gWidgets2tcltk-package.R' 'misc.R' 'tcltk-misc.R'
         'gseparator.R' 'gslider.R' 'gspinbutton.R' 'gstackwidget.R'
         'gstatusbar.R' 'gtext.R' 'gtimer.R' 'gtoolbar.R' 'gtree.R'
         'gvarbrowser.R' 'gwindow.R' 'icons.R' 'tk2tip.R' 'zzz.R'
-RoxygenNote: 5.0.1
+RoxygenNote: 6.1.0
 NeedsCompilation: no
-Packaged: 2016-06-01 15:03:19 UTC; verzani
+Packaged: 2018-09-24 21:10:24 UTC; verzani
 Repository: CRAN
-Date/Publication: 2016-06-02 06:10:12
+Date/Publication: 2018-09-25 13:20:02 UTC

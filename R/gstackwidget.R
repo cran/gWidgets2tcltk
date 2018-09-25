@@ -17,6 +17,7 @@ NULL
 
 GStackWidget <- setRefClass("GStackWidget",
                             contains="GContainer",
+                            fields = c("cur_index"),
                             methods=list(
                               initialize=function(toolkit=NULL,
                                  container=NULL, ...) {
@@ -49,22 +50,24 @@ GStackWidget <- setRefClass("GStackWidget",
                               get_value=function(...) get_index(),
                               set_value=function(value, ...) set_index(value),
                               set_index=function(ind) {
-                                tclServiceMode(TRUE)
+                                tclServiceMode(FALSE)
                                 ## remove child
                                 sapply(as.character(tkwinfo("children", widget)), tkpack.forget)
                                 ## add child
                                 tkpack(children[[ind]]$get_block(), expand=TRUE, fill="both")
+                                cur_index <<- ind
                                 tclServiceMode(TRUE)
                               },
                               get_index=function(...) {
-                                "which card is shown?"
+                                  "which card is shown?"
+                                  return(cur_index)
                                 ## hack with tk IDs
-                                tk_children <- as.character(tkwinfo("children", widget))
-                                tk_id <- Filter(function(i) as.logical(tkwinfo("ismapped", i)), tk_children)
-                                if(length(tk_id) == 0)
-                                  return(NA)
-                                child_ids <- sapply(children, function(i) i$get_widget()$ID)
-                                match(tk_id, child_ids)
+                                ## tk_children <- as.character(tkwinfo("children", widget))
+                                ## tk_id <- Filter(function(i) as.logical(tkwinfo("ismapped", i)), tk_children)
+                                ## if(length(tk_id) == 0)
+                                ##   return(NA)
+                                ## child_ids <- sapply(children, function(i) i$get_widget()$ID)
+                                ## match(tk_id, child_ids)
                               },
                               get_length=function() {
                                 length(children)
@@ -78,15 +81,22 @@ GStackWidget <- setRefClass("GStackWidget",
                                 
                                 child <- children[[idx]]
                                 ## remove from GUI, then from children
-                                if(idx == get_index()) {
+				## what is idx compared to get_index
+				cidx <- get_index()
+ 				tkpack.forget(getBlock(child))
+				children[[idx]] <<- NULL
+                                if(idx < cidx) {
+                                  set_index(cidx-1)
+                                } else if(idx == cidx) {
                                   if(idx > 1) set_index(idx - 1)
-                                  if(idx == 1 && get_length() > 1) set_index(idx + 1)
-                                  if(idx == 1 && get_length() == 1) {
-                                    warning(gettext("Removing last page"))
-                                    tkpack.forget(getBlock(child))
-                                  }
+                                  if(idx == 1 && get_length() > 0) set_index(1)
+                                  if(idx == 1 && get_length() == 0) {
+                                    warning(gettext("Removed last page"))
+				    cur_index <<- 0
+				  }
+ 
+                                } else {
                                 }
-                                children[[idx]] <<- NULL
                               }
                               ))
 
