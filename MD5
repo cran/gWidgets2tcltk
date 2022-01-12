@@ -1,5 +1,5 @@
-0091222abc6d7942ea402749bf79d349 *DESCRIPTION
-002267b7a063b229e6229ea5e0c7734c *NAMESPACE
+1759f7a8f3a37cf331f9fc40da9da390 *DESCRIPTION
+919f9289811a6e3be8d88d272eff43e3 *NAMESPACE
 f23fdfcf5fe24e83f33a62f4f7ddfc81 *NEWS
 85bc9220e1307b8dffd59460855a7252 *R/GComponent.R
 cc4e0d4a7bcf567c0509cf7c9656257e *R/GContainer.R
@@ -25,7 +25,7 @@ fcbfb087300c77c7af1eafe93971c80e *R/gimage.R
 2cd47c609d2d01f6bdbacfa82203b9e8 *R/glabel.R
 0fb17b77baf910654c5ba39f9bf9e492 *R/glayout.R
 99e06c4cc959eff8857a70680f47e1b0 *R/gmenu.R
-a3417a526feb2ede578503157d3012be *R/gnotebook.R
+fdff216ac6165eb3c2469dce10ff72ed *R/gnotebook.R
 bb09a37b427e38e1381d38f97aa27f45 *R/gpanedgroup.R
 c76185ff41b4515ac4bc9e7ddad9ed3d *R/gprogressbar.R
 8d25de72303b2d37c4b13846a7815d35 *R/gradio.R
@@ -37,10 +37,10 @@ b5bbb8b246041c10761cb9aca3da9e3d *R/gstatusbar.R
 81f8d5e1047bb4f3bd962b6c268de403 *R/gtable.R
 a67e9f5ad8191dcdce5a2d1071bc1fed *R/gtext.R
 206b7179ec60a4a45f164465b40f49de *R/gtimer.R
-d982274ec6948b92dadc2263d199e48f *R/gtoolbar.R
+f1e13e587ce04e8224450b4e9b1c21ab *R/gtoolbar.R
 330adf592682654118889cb6cac0fa55 *R/gtree.R
 b37f127642e75d2756b164daa4ca7331 *R/gvarbrowser.R
-4818119f0371cb45c80531b9cd1d3740 *R/gwindow.R
+03545e5b78b09bcfdd099db50860e20e *R/gwindow.R
 e88b368153ba9db5f7d9616581a9cf1d *R/icons.R
 69b7b94684f84142de817a850899efcc *R/misc.R
 85b9595a3e8c2214015bf61c24bde21c *R/tablelist.R
