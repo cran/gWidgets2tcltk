@@ -1,4 +1,4 @@
-1759f7a8f3a37cf331f9fc40da9da390 *DESCRIPTION
+50858e1c27dc84ffe8bee734f8503ebf *DESCRIPTION
 919f9289811a6e3be8d88d272eff43e3 *NAMESPACE
 f23fdfcf5fe24e83f33a62f4f7ddfc81 *NEWS
 85bc9220e1307b8dffd59460855a7252 *R/GComponent.R
@@ -25,7 +25,7 @@ fcbfb087300c77c7af1eafe93971c80e *R/gimage.R
 2cd47c609d2d01f6bdbacfa82203b9e8 *R/glabel.R
 0fb17b77baf910654c5ba39f9bf9e492 *R/glayout.R
 99e06c4cc959eff8857a70680f47e1b0 *R/gmenu.R
-fdff216ac6165eb3c2469dce10ff72ed *R/gnotebook.R
+36a985db179ae48cf7c728cffc64971e *R/gnotebook.R
 bb09a37b427e38e1381d38f97aa27f45 *R/gpanedgroup.R
 c76185ff41b4515ac4bc9e7ddad9ed3d *R/gprogressbar.R
 8d25de72303b2d37c4b13846a7815d35 *R/gradio.R
